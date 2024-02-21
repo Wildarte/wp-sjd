@@ -19,7 +19,7 @@
         </form>
     </div>
     
-    <header class="header">
+    <header class="header <?= is_front_page() == false ? "header_unposition" : "" ?>">
         <div class="top_header">
             <div class="access animate__animated animate__bounceInDown">
                 <p>Acessibilidade:</p>
@@ -33,12 +33,24 @@
             </div>
         </div>
         <div class="bottom_header">
-                <a href="" class="logo_header">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/logo.png" alt="">
+
+                <a href="<?= esc_url(home_url('/')) ?>" class="logo_header">
+
+                    <?php
+                        $custom_logo_id = get_theme_mod('custom_logo');
+                        $logo = wp_get_attachment_image_src($custom_logo_id , 'full');
+
+                        if (has_custom_logo()) {
+                            echo '<img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '">';
+                        }
+                    ?>
+                    
+
                     <div class="info_logo">
                         <p><strong>Prefeitura</strong></p>
                         <p>São José do Divino</p>
                     </div>
+
                 </a>
 
                 <nav class="menu">
@@ -55,14 +67,14 @@
                             <i class="bi bi-x-lg"></i>
                         </div>
                     </div>
-                    <ul>
-                        <li><a href="">HOME</a></li>
-                        <li><a href="">COMPETÊNCIAS E RESPONSÁVEIS</a></li>
-                        <li><a href="">NOTÍCIAS</a></li>
-                        <li><a href="">SERVIÇOS</a></li>
-                        <li><a href="">LICITAÇÕES</a></li>
-                        <li><a href="">LEGISLAÇÃO</a></li>
-                    </ul>
+                    
+                    <?php
+                        wp_nav_menu(array(
+                            'theme_location' => 'menu-principal',
+                            'menu_id' => 'menu-principal',
+                            'container' => false,
+                        ));
+                    ?>
 
                     <div class="btn_search">
                         <i class="bi bi-search"></i>

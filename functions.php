@@ -25,7 +25,11 @@ function registrar_menus() {
     register_nav_menus(
         array(
             'menu-principal' => __('Menu Principal'),
-            'menu-rodape' => __('Menu Rodapé')
+            'menu-rodape-prefeitura' => __('Menu Prefeitura Rodapé'),
+            'menu-rodape-servicos' => __('Menu Serviços Rodapé'),
+            'menu-rodape-outros-acessos' => __('Menu Outros Acessos Rodapé'),
+            'menu-rodape-menu' => __('Menu Menu Rodapé'),
+            'menu-rodape-secretarias' => __('Menu Secretarias Rodapé'),
         )
     );
 }
@@ -42,6 +46,17 @@ function adicionar_classe_body($classes) {
     return $classes;
 }
 add_filter('body_class', 'adicionar_classe_body');
+
+function meu_tema_suporte_logo() {
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+        'header-text' => array('site-title', 'site-description'),
+    ));
+}
+add_action('after_setup_theme', 'meu_tema_suporte_logo');
 
 // Outras funções personalizadas aqui...
 

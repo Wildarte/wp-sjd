@@ -342,7 +342,7 @@ nav.menu ul li a{
     position: absolute;
     left: 0;
     top: 50%;
-    background-color: var(--color-green);
+    background-color: var(--color-gray);
 }
 .head_section span{
     position: relative;
@@ -695,6 +695,7 @@ footer.footer{
     overflow: hidden;
     transition: all .13s;
     text-align: center;
+    flex-direction: column;
 }
 .container_services a img{
     margin: auto;

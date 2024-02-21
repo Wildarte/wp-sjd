@@ -3,68 +3,77 @@
             <div class="f-25">
                 <h3>Prefeitura</h3>
 
-                <ul>
-                    <li><a href="">Prefeito</a></li>
-                    <li><a href="">Vice-Prefeito</a></li>
-                    <li><a href="">Galeria de Prefeitos</a></li>
-                </ul>
+                <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'menu-rodape-prefeitura',
+                        'menu_id' => 'menu-rodape-prefeitura',
+                        'container' => false,
+                    ));
+                ?>
             </div>
 
             <div class="f-25">
                 <h3>Serviços</h3>
 
-                <ul>
-                    <li><a href="">Portal da Transparência</a></li>
-                    <li><a href="">e-sic</a></li>
-                    <li><a href="">Links Importantes</a></li>
-                    <li><a href="">Nota Fiscal Eletrônica</a></li>
-                    <li><a href="">Licitações</a></li>
-                </ul>
+                <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'menu-rodape-servicos',
+                        'menu_id' => 'menu-rodape-servicos',
+                        'container' => false,
+                    ));
+                ?>
             </div>
 
             <div class="f-25">
                 <h3>Outros Acessos</h3>
 
-                <ul>
-                    <li><a href="">Receitas</a></li>
-                    <li><a href="">Despesas</a></li>
-                    <li><a href="">Contratos</a></li>
-                    <li><a href="">Radar da Transparência</a></li>
-                    <li><a href="">Ouvidoria</a></li>
-                    <li><a href="">Notas Eletrônicas</a></li>
-                </ul>
+                <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'menu-rodape-outros-acessos',
+                        'menu_id' => 'menu-rodape-outros-acessos',
+                        'container' => false,
+                    ));
+                ?>
             </div>
 
             <div class="f-25">
                 <h3>Menu</h3>
 
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Competências e Responsáveis</a></li>
-                    <li><a href="">Notícias</a></li>
-                    <li><a href="">Serviços</a></li>
-                    <li><a href="">Licitações</a></li>
-                    <li><a href="">Legislações</a></li>
-                </ul>
+                <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'menu-rodape-menu',
+                        'menu_id' => 'menu-rodape-menu',
+                        'container' => false,
+                    ));
+                ?>
             </div>
         </div>
         <div class="middle_footer">
             <div class="container">
                 <h3>Secretarias</h3>
 
-                <ul class="ul_line">
-                    <li><a href="">Secretaria da Saúde</a></li>
-                    <li><a href="">Secretaria de Segurança</a></li>
-                    <li><a href="">Secretaria de Transporte</a></li>
-                    <li><a href="">Secretaria da Edução</a></li>
-                </ul>
+                <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'menu-rodape-menu',
+                        'menu_id' => 'menu-rodape-menu',
+                        'menu_class' => 'ul_line',
+                        'container' => 'ul',
+                    ));
+                ?>
             </div>
         </div>
         <div class="bottom_footer">
             <div class="container d-flex content_bottom_footer">
                 <div class="f-33 col_bottom_footer">
-                    <a href="" class="logo_header">
-                        <img src="assets/img/logo.png" alt="">
+                    <a href="<?= home_url() ?>" class="logo_header">
+                        <?php
+                            $custom_logo_id = get_theme_mod('custom_logo');
+                            $logo = wp_get_attachment_image_src($custom_logo_id , 'full');
+
+                            if (has_custom_logo()) {
+                                echo '<img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '">';
+                            }
+                        ?>
                         <div class="info_logo">
                             <p><strong>Prefeitura</strong></p>
                             <p>São José do Divino</p>
