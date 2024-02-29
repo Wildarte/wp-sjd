@@ -875,6 +875,78 @@ footer.footer{
 
 
 
+/* ========================= page personal ============================ */
+.sec-personal{
+    padding: 40px 10px;
+    display: flex;
+}
+
+.img_personal img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.info_personal{
+    width: calc(100% - 300px);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    padding-left: 40px;
+}
+.info_personal h2{
+    margin-bottom: 20px;
+}
+.share_personal{
+    width: 100%;
+    background-color: var(--color-gray-4);
+    padding: 10px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+}
+.head_info_personal h3{
+    font-weight: 300;
+}
+.share_personal p{
+    margin-right: 20px;
+}
+.share_list{
+    display: flex;
+    align-items: center;
+}
+.share_list li{
+    margin: 0 4px;
+    display: flex;
+}
+.share_list a{
+    padding: 4px 6px;
+    border-radius: 3px;
+    color: var(--color-white);
+}
+.share_list a.link_facebook{
+    background-color: #0074EE;
+}
+.share_list a.link_whatsapp{
+    background-color: #009344;
+}
+.share_list a.link_twitter{
+    background-color: #0E0E0E;
+}
+.share_list a.link_email{
+    background-color: #F73F2F;
+}
+.share_list a.link_linkedin{
+    background-color: #00639C;
+}
+.share_list a.link_telegram{
+    background-color: #0084C6;
+}
+/* ========================= page personal ============================ */
+
+
+
 .bread_crumb{
     width: 100%;
     background-color: var(--color-gray-4);
