@@ -5,6 +5,8 @@
     <main>
         <section class="hero">
             
+
+
             <div class="fast_access access_desktop">
                 <a href="" class="animate__animated animate__bounceIn">
                     <img src="<?= get_template_directory_uri() ?>/assets/img/portal.png" alt="">
@@ -59,82 +61,101 @@
                 <div class="head_section">
                     <h2><span>Destaque</span></h2>
                 </div>
-    
+
                 <div class="content_destaque">
                     <div class="carousel_dest owl-carousel">
-                        <a href="">
-                            <img src="<?= get_template_directory_uri() ?>/assets/img/img-dest.png" alt="">
-                        </a>
-                        <a href="">
-                            <img src="<?= get_template_directory_uri() ?>/assets/img/img-destaq.jpg" alt="">
-                        </a>
-                        <a href="">
-                            <img src="<?= get_template_directory_uri() ?>/assets/img/img-destaq2.jpg" alt="">
-                        </a>
+
+                    <?php
+                        $dest_main = get_field('destaque_principal_home');
+                        
+
+                        $args = [
+                            'post_type' => 'post',
+                            'post__in' => $dest_main,
+                        ];
+
+                        $results = new WP_Query($args);
+
+                        if($results->have_posts()):
+                            while($results->have_posts()):
+                                $results->the_post();
+
+                                echo '<a href="'.get_the_permalink().'"><img src="'.get_the_post_thumbnail_url(null, 'large').'" alt=""></a>';
+
+                            endwhile;
+                        endif;
+
+                        wp_reset_query();
+                        wp_reset_postdata();
+
+                    ?>
+                        
                     </div>
 
                     <div class="sing_destaq d-flex">
 
-                            <div class="card_destaq">
-                                <a href="">
-                                    <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/6f151b5ad92f3ee6826848d0c0beaa02.png" alt="">
-                                </a>
-                                <div class="info_card_destaq">
-                                    <h4>AVISO DE CONTRATAÇÃO DIRETA</h4>
-                                    <p>Dispensa Eletrônica nº 003/2024.</p>
+                        <?php
 
-                                    <div class="over_link_card_destaq">
-                                        <a href="" class="link_card_destaq">Saiba Mais</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
+                            $dest_outros = get_field('outros_destaques_home'); 
 
-                            <div class="card_destaq">
-                                <a href="">
-                                    <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/c3f0b81cac5f2fd05d270a8206a176f9.png" alt="">
-                                </a>
-                                <div class="info_card_destaq">
-                                    <h4>RESULTADO PRELIMINAR</h4>
-                                    <p>CONCURSO PÚBLICO</p>
+                            $args = [
+                                'post_type' => 'post',
+                                'post__in' => $dest_outros,
+                            ];
 
-                                    <div class="over_link_card_destaq">
-                                        <a href="" class="link_card_destaq">Saiba Mais</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
+                            $results = new WP_Query($args);
 
-                            <div class="card_destaq">
-                                <a href="">
-                                    <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/5292c2ec5bd2e8b995d4d830986edeeb.png" alt="">
-                                </a>
-                                <div class="info_card_destaq">
-                                    <h4>CONCURSO PÚBLICO </h4>
-                                    <p>001/2022-P.M.SÃO JOSÉ DO DIVINO-PI Provimento de cargos efetivos</p>
+                            if($results->have_posts()):
+                                while($results->have_posts()):
+                                    $results->the_post();
 
-                                    <div class="over_link_card_destaq">
-                                        <a href="" class="link_card_destaq">Saiba Mais</a>
-                                    </div>
-                                </div>
-                            </div>
-                        
+                                    ?>
+
+                                        <div class="card_destaq">
+                                            <a href="<?= get_the_permalink() ?>">
+                                                <img src="<?= get_the_post_thumbnail_url(null, 'medium') ?>" alt="">
+                                            </a>
+                                            <div class="info_card_destaq">
+                                                <h4><?= get_the_title() ?></h4>
+                                                <p><?= get_the_excerpt() ?></p>
+
+                                                <div class="over_link_card_destaq">
+                                                    <a href="<?= get_the_permalink() ?>" class="link_card_destaq">Saiba Mais</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <?php
+
+                                endwhile;
+                            endif;
+
+                            wp_reset_query();
+                            wp_reset_postdata();
+
+                        ?>
+
                     </div>
                 </div>
+
                 <section>
                     <div class="container sec-default-middle p-10-0">
                         <div class="destaques_page owl-carousel">
-                            <a href="" clas>
-                                <img src="https://cdn.pixabay.com/photo/2018/05/02/18/23/landscape-3369304_1280.jpg" alt="">
+
+                            <?php
+
+                                $slide_imagens = get_field('slide_imagens');
+
+                                foreach($slide_imagens as $item):
+
+                            ?>
+
+                            <a href="<?= $item['url_imagem'] ?>" class="">
+                                <img src="<?= $item['imagem_slide'] ?>" alt="">
                             </a>
+
+                            <?php endforeach; ?>
         
-                            <a href="" clas>
-                                <img src="https://cdn.pixabay.com/photo/2014/07/06/17/20/tractor-385681_1280.jpg" alt="">
-                            </a>
-        
-                            <a href="" clas>
-                                <img src="https://cdn.pixabay.com/photo/2018/05/26/19/42/rural-area-3432088_960_720.jpg" alt="">
-                            </a>
                         </div>
                     </div>
                 </section>
