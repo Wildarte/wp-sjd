@@ -58,6 +58,47 @@ function meu_tema_suporte_logo() {
 }
 add_action('after_setup_theme', 'meu_tema_suporte_logo');
 
-// Outras funções personalizadas aqui...
+
+function get_page_url_by_template($template_name) {
+    $args = array(
+        'post_type'      => 'page', // Altere para 'post' se desejar buscar em posts em vez de páginas
+        'post_status'    => 'publish',
+        'meta_key'       => '_wp_page_template',
+        'meta_value'     => $template_name . '.php' // Nome do modelo que você está procurando
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        $query->the_post();
+        $page_url = get_permalink();
+        wp_reset_postdata();
+        return $page_url;
+    } else {
+        return false; // Retorna falso se não encontrar nenhuma página com o modelo especificado
+    }
+}
+
+
+
+
+// ========================== custom post type ========================================
+// Função para registrar um tipo de post personalizado
+function create_posttype(){
+    register_post_type( 'galeria',
+        array(
+        'labels' => array(
+        'name' => __( 'Galerias' ),
+        'singular_name' => __( 'galeria' )
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array( 'slug' => 'galeria' ),
+        'menu_position' => 5,
+        'supports' => array ( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields' )
+        )
+    );
+}
+    add_action ( 'init', 'create_posttype' );
 
 ?>
