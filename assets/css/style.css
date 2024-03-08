@@ -988,6 +988,35 @@ footer.footer{
 }
 /* ========================= page personal ============================ */
 
+/* ========================= page secretario ========================== */
+.head_info_personal{
+    width: 100%;
+}
+.info_single_secretario{
+    width: 100%;
+    padding: 10px 0 40px;
+}
+.info_single_secretario ul li{
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+.info_single_secretario ul li i{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #BBCDCF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+    margin-right: 10px;
+    font-size: 16px;
+}
+/* ========================= page secretario ========================== */
+
+
 
 
 .bread_crumb{
@@ -1233,6 +1262,15 @@ footer.footer{
         margin: 0;
         border-radius: 0;
     }
+    .img_personal, .info_personal{
+        width: 100%;
+    }
+    .img_personal{
+        text-align: center;
+    }
+    .info_personal{
+        padding: 0;
+    }
 }
 
 @media(max-width: 600px){
@@ -1326,5 +1364,13 @@ footer.footer{
         margin: auto;
         height: 200px;
         border-radius: 50%;
+    }
+    .img_personal img{
+        width: 280px;
+        height: 280px;
+        margin-bottom: 20px;
+    }
+    .sec-personal{
+        padding: 10px;
     }
 }

@@ -17,13 +17,27 @@
        <section>
             <div class="container d-flex sec-personal">
                 <div class="img_personal">
-                    <img src="https://cdn.pixabay.com/photo/2016/01/07/04/52/designer-1125324_1280.jpg" alt="">
+                    <?php
+                            $img = get_field('foto_do_secretario');
+
+                            $img_url = wp_get_attachment_image_url($img['id'], 'large');
+                    ?>
+                    <img src="<?= $img_url ?>" alt="">
                 </div>
 
                 <div class="info_personal">
                     <div class="head_info_personal">
-                        <h3>Prefeito</h3>
-                        <h2>Armando Eermelino</h2>
+                        <h3><?= get_field('subtitulo') ?></h3>
+                        <h2><?= get_field('titulo_responsavel') ?></h2>
+                    </div>
+
+                    <div class="info_single_secretario">
+                        <ul>
+                            <li><i class="bi bi-clock"></i> <span><?= get_field('horario_de_funcionamento') ?></span></li>
+                            <li><i class="bi bi-telephone-fill"></i> <span><?= get_field('telefone') ?></span></li>
+                            <li><i class="bi bi-envelope"></i> <span><?= get_field('e-mail') ?></span></li>
+                            <li><i class="bi bi-geo-alt-fill"></i> <span><?= get_field('endereco') ?></span></li>
+                        </ul>
                     </div>
 
                     <p>Filho do finado Bento Camargo e Maria Ascenção Bedin Camargo, Emerson Rodrigo Camargo, conhecido em Jaboticabal e na região por Prof. Emerson, nasceu em 14 de julho de 1979, em Jaboticabal.</p>
@@ -31,7 +45,7 @@
                     <p>Emerson é graduado em Filosofia e História, Mestre em Educação e pós-graduando em Gestão Pública, curso que tem feito recentemente e o ajuda a compreender melhor os desafios da administração de uma cidade e quais os melhores caminhos para se tomar na resolução de problemas. Atualmente é professor da rede pública e privada de ensino.</p>
 
                     <p>Durante sua adolescência e até hoje, prof. Emerson sempre foi e se manteve engajado no assunto político, porém, sem fazer desta vocação a sua profissão. Entre os anos de 2009 e 2012 ele esteve como vereador na cidade de Jaboticabal.</p>
-                </div>
+                
             </div>
        </section>
 
