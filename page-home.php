@@ -9,54 +9,40 @@ use FakerPress\Field;
     <main>
         <section class="hero">
             
-
-
             <div class="fast_access access_desktop">
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/portal.png" alt="">
-                    <p>Portal da transparência</p>
+
+                <?php
+                    $acesso_rapido_hero = get_field('acesso_rapido_hero');
+                    
+
+                    foreach($acesso_rapido_hero as $item):
+                ?>
+
+                <a href="<?= $item['link'] ?>" class="animate__animated animate__bounceIn">
+                    <img src="<?= $item['imagem'] ?>" alt="">
+                    <p><?= $item['titulo'] ?></p>
                 </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/e-sic.png" alt="">
-                    <p>e-sic</p>
-                </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/links.png" alt="">
-                    <p>Links Importantes</p>
-                </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/notas.png" alt="">
-                    <p>Nota Fiscal eletrônica</p>
-                </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/licitacoes.png" alt="">
-                    <p>Licitações</p>
-                </a>
+
+                <?php endforeach; ?>
+
             </div>
         </section>
 
         <section class="access_mobile">
             <div class="fast_access">
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/portal.png" alt="">
-                    <p>Portal da transparência</p>
+                <?php
+                    $acesso_rapido_hero = get_field('acesso_rapido_hero');
+                    
+
+                    foreach($acesso_rapido_hero as $item):
+                ?>
+
+                <a href="<?= $item['link'] ?>" class="animate__animated animate__bounceIn">
+                    <img src="<?= $item['imagem'] ?>" alt="">
+                    <p><?= $item['titulo'] ?></p>
                 </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/e-sic.png" alt="">
-                    <p>e-sic</p>
-                </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/links.png" alt="">
-                    <p>Links Importantes</p>
-                </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/notas.png" alt="">
-                    <p>Nota Fiscal eletrônica</p>
-                </a>
-                <a href="" class="animate__animated animate__bounceIn">
-                    <img src="<?= get_template_directory_uri() ?>/assets/img/licitacoes.png" alt="">
-                    <p>Licitações</p>
-                </a>
+
+                <?php endforeach; ?>
             </div>
         </section>
 

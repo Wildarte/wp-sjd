@@ -95,10 +95,30 @@ function create_posttype(){
         'has_archive' => true,
         'rewrite' => array( 'slug' => 'galeria' ),
         'menu_position' => 5,
-        'supports' => array ( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields' )
+        'supports' => array ( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields' ),
+        'menu_icon' => 'dashicons-format-gallery'
         )
     );
 }
-    add_action ( 'init', 'create_posttype' );
+add_action ( 'init', 'create_posttype' );
 
+
+
+function create_posttype_secretaria(){
+    register_post_type( 'secretaria',
+        array(
+        'labels' => array(
+        'name' => __( 'Secretarias' ),
+        'singular_name' => __( 'secretaria' )
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array( 'slug' => 'secretaria' ),
+        'menu_position' => 5,
+        'supports' => array ( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields' ),
+        'menu_icon' => 'dashicons-category'
+        )
+    );
+}
+add_action ( 'init', 'create_posttype_secretaria' );
 ?>

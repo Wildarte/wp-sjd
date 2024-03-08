@@ -148,20 +148,63 @@ header.header{
     top: 0;
     left: 0;
 }
+
+
+
+/* ======================================== menu ====================================== */
 nav.menu{
     display: flex;
     align-items: center;
 }
-nav.menu ul{
+nav.menu > ul{
     display: flex;
     align-items: center;
     color: var(--color-white);
 }
-nav.menu ul li a{
+nav.menu > ul > li a{
     padding: 5px 20px;
     color: var(--color-white);
     font-weight: 300;
 }
+nav.menu > ul > li.menu-item-has-children{
+    position: relative;
+}
+nav.menu > ul > li.menu-item-has-children a{
+    display: flex;
+    align-items: center;
+}
+nav.menu > ul > li.menu-item-has-children > a::after{
+    content: " ▼ ";
+    font-size: 12px;
+    margin-left: 5px;
+}
+nav.menu > ul > li.menu-item-has-children > ul.sub-menu{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: var(--color-main);
+    width: 300px;
+    display: none;
+}
+nav.menu > ul > li.menu-item-has-children:hover > ul.sub-menu{
+    display: block;
+}
+nav.menu > ul > li.menu-item-has-children > ul.sub-menu > li{
+    display: flex;
+    width: 100%;
+}
+nav.menu > ul > li.menu-item-has-children > ul.sub-menu > li > a{
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255, .3);
+    width: 100%;
+}
+nav.menu > ul > li.menu-item-has-children > ul.sub-menu > li > a:hover{
+    background-color: var(--color-white);
+    color: var(--color-main);
+}
+
+/* ======================================== menu ====================================== */
+
 
 .fast_access{
     display: flex;
@@ -971,6 +1014,9 @@ footer.footer{
     display: block;
 }
 
+
+
+
 @media(max-width: 1200px){
     .fast_access a{
         width: 50%;
@@ -1044,6 +1090,23 @@ footer.footer{
     nav.menu ul li:last-child a{
         border: none;
     }
+    nav.menu > ul > li.menu-item-has-children a{
+        width: 100%;
+        justify-content: space-between;
+    }
+    nav.menu > ul > li.menu-item-has-children > ul.sub-menu{
+        display: block;
+        position: unset;
+        width: 100%;
+        background-color: var(--color-white);
+        height: 0;
+        overflow: hidden;
+    }
+    .open_submenu{
+        height: auto!important;
+        padding: 10px 20px!important;
+    }
+
     .bottom_header{
         justify-content: space-between;
     }

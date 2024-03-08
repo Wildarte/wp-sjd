@@ -117,4 +117,36 @@ $(document).ready(function(){
 
     }
 
+    const item_menu = document.querySelectorAll('nav.menu > ul > li.menu-item-has-children > a');
+    const sub_menu = document.querySelectorAll('nav.menu > ul > li.menu-item-has-children > ul.sub-menu');
+    console.log('itens menu: '+item_menu.length);
+
+    if(item_menu){
+        item_menu.forEach((item, index) => {
+
+            item.addEventListener('click', (e) => {
+
+                e.preventDefault();
+    
+                if(sub_menu[index].classList.contains('open_submenu')){
+                    sub_menu[index].classList.remove('open_submenu');
+                }else{
+                    sub_menu.forEach((item) => {
+    
+                        item.classList.remove('open_submenu');
+        
+                    });
+        
+                    sub_menu[index].classList.add('open_submenu');
+                }
+    
+    
+    
+            });
+    
+        });
+    }
+
+    
+
 });
