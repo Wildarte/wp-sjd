@@ -872,6 +872,9 @@ footer.footer{
     cursor: pointer;
     transition: all .23s;
 }
+.btn_card_comp_more{
+    display: block;
+}
 .btn_card_comp_more_mobile{
     display: none;
 }

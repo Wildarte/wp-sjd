@@ -22,14 +22,49 @@
                 </div>
                 
                 <div class="container_comp">
+
+                    <?php
+
+                        $args = [
+                            'post_type' => 'secretaria',
+                            'posts_per_page' => -1
+                        ];
+
+                        $results = new WP_Query($args);
+
+                        if($results->have_posts()):
+                            while($results->have_posts()):
+                                $results->the_post();
+
+                    ?>
+
                     <div class="over_card_comp">
                         <div class="card_comp">
+                            
+                            <?php
+
+                                $custom_fields = get_post_custom(get_the_ID());
+
+                                //var_dump($custom_fields);
+
+                                $titulo_responsavel = $custom_fields['titulo_responsavel'][0];
+                                $subtitulo = $custom_fields['subtitulo'][0];
+                                $horario_de_funcionamento = $custom_fields['horario_de_funcionamento'][0];
+                                $telefone = $custom_fields['telefone'][0];
+                                $email = $custom_fields['e-mail'][0];
+                                $endereco = $custom_fields['endereco'][0];
+                                $img_id = $custom_fields['foto_do_secretario'][0];
+                                $img_url = wp_get_attachment_image_src($img_id, 'full')[0];
+
+
+                            ?>
+
                             <div class="left_card_comp">
-                                <img src="https://images.pexels.com/photos/32976/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                                <img src="<?= $img_url ?>" alt="">
                             </div>
                             <div class="right_card_comp">
                                 <div class="head_card_comp">
-                                    <h3>Secretário da educação</h3>
+                                    <h3><?= $subtitulo ?></h3>
 
                                     <span class="btn_close_card_comp">
                                         <i class="bi bi-x-lg"></i>
@@ -37,21 +72,20 @@
                                 </div>
     
                                 <ul>
-                                    <li><i class="bi bi-person-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-clock"></i> <span>8h às 17h</span></li>
-                                    <li><i class="bi bi-telephone-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-person-fill"></i> <span>(99) 99999-9999</span></li>
-                                    <li><i class="bi bi-envelope"></i> <span>email@contato.com.br</span></li>
-                                    <li><i class="bi bi-geo-alt-fill"></i> <span>AVENIDA PAULO RODRIGUES S/N CENTRO</span></li>
+                                    <li><i class="bi bi-person-fill"></i> <span><?= $titulo_responsavel ?></span></li>
+                                    <li><i class="bi bi-clock"></i> <span><?= $horario_de_funcionamento ?></span></li>
+                                    <li><i class="bi bi-telephone-fill"></i> <span><?= $telefone ?></span></li>
+                                    <li><i class="bi bi-envelope"></i> <span><?= $email ?></span></li>
+                                    <li><i class="bi bi-geo-alt-fill"></i> <span><?= $endereco ?></span></li>
                                 </ul>
     
                                 <div class="card_comp_more">
-                                    <div class="btn_card_comp_more">
+                                    <a href="<?= get_the_permalink() ?>" class="btn_card_comp_more" style="width: 100%">
                                         Ver Mais
-                                    </div>
-                                    <div class="btn_card_comp_more_mobile">
+                                    </a>
+                                    <a href="<?= get_the_permalink() ?>" class="btn_card_comp_more_mobile" style="width: 100%">
                                         Ver Mais
-                                    </div>
+                                    </a>
                                 </div>
     
                                 <div class="desc_card_comp">
@@ -61,206 +95,12 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="over_card_comp">
-                        <div class="card_comp">
-                            <div class="left_card_comp">
-                                <img src="https://images.pexels.com/photos/4427610/pexels-photo-4427610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-                            </div>
-                            <div class="right_card_comp">
-                                <div class="head_card_comp">
-                                    <h3>Secretário da educação</h3>
 
-                                    <span class="btn_close_card_comp">
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                </div>
-    
-                                <ul>
-                                    <li><i class="bi bi-person-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-clock"></i> <span>8h às 17h</span></li>
-                                    <li><i class="bi bi-telephone-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-person-fill"></i> <span>(99) 99999-9999</span></li>
-                                    <li><i class="bi bi-envelope"></i> <span>email@contato.com.br</span></li>
-                                    <li><i class="bi bi-geo-alt-fill"></i> <span>AVENIDA PAULO RODRIGUES S/N CENTRO</span></li>
-                                </ul>
-    
-                                <div class="card_comp_more">
-                                    <div class="btn_card_comp_more">
-                                        Ver Mais
-                                    </div>
-                                    <div class="btn_card_comp_more_mobile">
-                                        Ver Mais
-                                    </div>
-                                </div>
+                    <?php
+                        endwhile; endif;
+                        wp_reset_query(); wp_reset_postdata();
 
-                                <div class="desc_card_comp">
-                                    <p>A SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL TEM COMO FINALIDADE ESTABELECER A GESTÃO INTEGRADA DE SERVIÇOS E BENEFÍCIOS; E AFIANÇAR A VIGILÂNCIA SOCIAL E A GARANTIA DE DIREITOS. O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS) ORGANIZAÇÃO A OFERTA DE PROGRAMAS, SERVIÇOS, PROJETOS E BENEFÍCIOS, BEM COMO O DESENVOLVIMENTO DE POLÍTICAS PÚBLICAS VOLTADAS PARA A PROTEÇÃO INTEGRAL DO PORTADOR DE DEFICIÊNCIA, QUALQUER QUE SEJA SEU NÍVEL DE COMPROMETIMENTO, CONTRIBUINDO PARA O ESTABELECIMENTO DE SUA DIGNIDADE E EXERCÍCIO PLENO DE SUA CIDADANIA E CONSEQUENTE TRANSFORMAÇÃO DA CONCEPÇÃO SOCIAL. É UMA POLÍTICA DE SEGURIDADE SOCIAL REALIZADA ATRAVÉS DE UM CONJUNTO INTEGRADO DE AÇÕES DE INICIATIVA PÚBLICA E DA SOCIEDADE, PARA GARANTIR O ATENDIMENTO ÀS NECESSIDADES BÁSICAS DOS CIDADÃOS. • IMPLEMENTAR O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS), PROMOVENDO SERVIÇOS DE PROTEÇÃO SOCIAL AOS CIDADÃOS QUE DELA NECESSITAREM; • SER REFERÊNCIA NA DEFESA E GARANTIA DE DIREITOS E NA PRESTAÇÃO DE SERVIÇOS, PROGRAMAS, PROJETOS E BENEFÍCIOS ÀS FAMÍLIAS DE SÃO JOSÉ DO DIVINO, ORIENTADOS PELA POLÍTICA NACIONAL DE ASSISTÊNCIA SOCIAL (PNAS), LEI ORGÂNICA DE ASSISTÊNCIA SOCIAL (LOAS) E PELO SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS).</p>
-                                </div>
-    
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="over_card_comp">
-                        <div class="card_comp">
-                            <div class="left_card_comp">
-                                <img src="https://images.pexels.com/photos/4427614/pexels-photo-4427614.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-                            </div>
-                            <div class="right_card_comp">
-                                <div class="head_card_comp">
-                                    <h3>Secretário da educação</h3>
-
-                                    <span class="btn_close_card_comp">
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                </div>
-    
-                                <ul>
-                                    <li><i class="bi bi-person-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-clock"></i> <span>8h às 17h</span></li>
-                                    <li><i class="bi bi-telephone-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-person-fill"></i> <span>(99) 99999-9999</span></li>
-                                    <li><i class="bi bi-envelope"></i> <span>email@contato.com.br</span></li>
-                                    <li><i class="bi bi-geo-alt-fill"></i> <span>AVENIDA PAULO RODRIGUES S/N CENTRO</span></li>
-                                </ul>
-    
-                                <div class="card_comp_more">
-                                    <div class="btn_card_comp_more">
-                                        Ver Mais
-                                    </div>
-                                    <div class="btn_card_comp_more_mobile">
-                                        Ver Mais
-                                    </div>
-                                </div>
-
-                                <div class="desc_card_comp">
-                                    <p>A SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL TEM COMO FINALIDADE ESTABELECER A GESTÃO INTEGRADA DE SERVIÇOS E BENEFÍCIOS; E AFIANÇAR A VIGILÂNCIA SOCIAL E A GARANTIA DE DIREITOS. O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS) ORGANIZAÇÃO A OFERTA DE PROGRAMAS, SERVIÇOS, PROJETOS E BENEFÍCIOS, BEM COMO O DESENVOLVIMENTO DE POLÍTICAS PÚBLICAS VOLTADAS PARA A PROTEÇÃO INTEGRAL DO PORTADOR DE DEFICIÊNCIA, QUALQUER QUE SEJA SEU NÍVEL DE COMPROMETIMENTO, CONTRIBUINDO PARA O ESTABELECIMENTO DE SUA DIGNIDADE E EXERCÍCIO PLENO DE SUA CIDADANIA E CONSEQUENTE TRANSFORMAÇÃO DA CONCEPÇÃO SOCIAL. É UMA POLÍTICA DE SEGURIDADE SOCIAL REALIZADA ATRAVÉS DE UM CONJUNTO INTEGRADO DE AÇÕES DE INICIATIVA PÚBLICA E DA SOCIEDADE, PARA GARANTIR O ATENDIMENTO ÀS NECESSIDADES BÁSICAS DOS CIDADÃOS. • IMPLEMENTAR O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS), PROMOVENDO SERVIÇOS DE PROTEÇÃO SOCIAL AOS CIDADÃOS QUE DELA NECESSITAREM; • SER REFERÊNCIA NA DEFESA E GARANTIA DE DIREITOS E NA PRESTAÇÃO DE SERVIÇOS, PROGRAMAS, PROJETOS E BENEFÍCIOS ÀS FAMÍLIAS DE SÃO JOSÉ DO DIVINO, ORIENTADOS PELA POLÍTICA NACIONAL DE ASSISTÊNCIA SOCIAL (PNAS), LEI ORGÂNICA DE ASSISTÊNCIA SOCIAL (LOAS) E PELO SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS).</p>
-                                </div>
-    
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="over_card_comp">
-                        <div class="card_comp">
-                            <div class="left_card_comp">
-                                <img src="https://images.pexels.com/photos/5668773/pexels-photo-5668773.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
-                            </div>
-                            <div class="right_card_comp">
-                                <div class="head_card_comp">
-                                    <h3>Secretário da educação</h3>
-
-                                    <span class="btn_close_card_comp">
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                </div>
-    
-                                <ul>
-                                    <li><i class="bi bi-person-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-clock"></i> <span>8h às 17h</span></li>
-                                    <li><i class="bi bi-telephone-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-person-fill"></i> <span>(99) 99999-9999</span></li>
-                                    <li><i class="bi bi-envelope"></i> <span>email@contato.com.br</span></li>
-                                    <li><i class="bi bi-geo-alt-fill"></i> <span>AVENIDA PAULO RODRIGUES S/N CENTRO</span></li>
-                                </ul>
-    
-                                <div class="card_comp_more">
-                                    <div class="btn_card_comp_more">
-                                        Ver Mais
-                                    </div>
-                                    <div class="btn_card_comp_more_mobile">
-                                        Ver Mais
-                                    </div>
-                                </div>
-
-                                <div class="desc_card_comp">
-                                    <p>A SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL TEM COMO FINALIDADE ESTABELECER A GESTÃO INTEGRADA DE SERVIÇOS E BENEFÍCIOS; E AFIANÇAR A VIGILÂNCIA SOCIAL E A GARANTIA DE DIREITOS. O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS) ORGANIZAÇÃO A OFERTA DE PROGRAMAS, SERVIÇOS, PROJETOS E BENEFÍCIOS, BEM COMO O DESENVOLVIMENTO DE POLÍTICAS PÚBLICAS VOLTADAS PARA A PROTEÇÃO INTEGRAL DO PORTADOR DE DEFICIÊNCIA, QUALQUER QUE SEJA SEU NÍVEL DE COMPROMETIMENTO, CONTRIBUINDO PARA O ESTABELECIMENTO DE SUA DIGNIDADE E EXERCÍCIO PLENO DE SUA CIDADANIA E CONSEQUENTE TRANSFORMAÇÃO DA CONCEPÇÃO SOCIAL. É UMA POLÍTICA DE SEGURIDADE SOCIAL REALIZADA ATRAVÉS DE UM CONJUNTO INTEGRADO DE AÇÕES DE INICIATIVA PÚBLICA E DA SOCIEDADE, PARA GARANTIR O ATENDIMENTO ÀS NECESSIDADES BÁSICAS DOS CIDADÃOS. • IMPLEMENTAR O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS), PROMOVENDO SERVIÇOS DE PROTEÇÃO SOCIAL AOS CIDADÃOS QUE DELA NECESSITAREM; • SER REFERÊNCIA NA DEFESA E GARANTIA DE DIREITOS E NA PRESTAÇÃO DE SERVIÇOS, PROGRAMAS, PROJETOS E BENEFÍCIOS ÀS FAMÍLIAS DE SÃO JOSÉ DO DIVINO, ORIENTADOS PELA POLÍTICA NACIONAL DE ASSISTÊNCIA SOCIAL (PNAS), LEI ORGÂNICA DE ASSISTÊNCIA SOCIAL (LOAS) E PELO SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS).</p>
-                                </div>
-    
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="over_card_comp">
-                        <div class="card_comp">
-                            <div class="left_card_comp">
-                                <img src="https://images.pexels.com/photos/5668773/pexels-photo-5668773.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
-                            </div>
-                            <div class="right_card_comp">
-                                <div class="head_card_comp">
-                                    <h3>Secretário da educação</h3>
-
-                                    <span class="btn_close_card_comp">
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                </div>
-    
-                                <ul>
-                                    <li><i class="bi bi-person-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-clock"></i> <span>8h às 17h</span></li>
-                                    <li><i class="bi bi-telephone-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-person-fill"></i> <span>(99) 99999-9999</span></li>
-                                    <li><i class="bi bi-envelope"></i> <span>email@contato.com.br</span></li>
-                                    <li><i class="bi bi-geo-alt-fill"></i> <span>AVENIDA PAULO RODRIGUES S/N CENTRO</span></li>
-                                </ul>
-    
-                                <div class="card_comp_more">
-                                    <div class="btn_card_comp_more">
-                                        Ver Mais
-                                    </div>
-                                    <div class="btn_card_comp_more_mobile">
-                                        Ver Mais
-                                    </div>
-                                </div>
-
-                                <div class="desc_card_comp">
-                                    <p>A SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL TEM COMO FINALIDADE ESTABELECER A GESTÃO INTEGRADA DE SERVIÇOS E BENEFÍCIOS; E AFIANÇAR A VIGILÂNCIA SOCIAL E A GARANTIA DE DIREITOS. O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS) ORGANIZAÇÃO A OFERTA DE PROGRAMAS, SERVIÇOS, PROJETOS E BENEFÍCIOS, BEM COMO O DESENVOLVIMENTO DE POLÍTICAS PÚBLICAS VOLTADAS PARA A PROTEÇÃO INTEGRAL DO PORTADOR DE DEFICIÊNCIA, QUALQUER QUE SEJA SEU NÍVEL DE COMPROMETIMENTO, CONTRIBUINDO PARA O ESTABELECIMENTO DE SUA DIGNIDADE E EXERCÍCIO PLENO DE SUA CIDADANIA E CONSEQUENTE TRANSFORMAÇÃO DA CONCEPÇÃO SOCIAL. É UMA POLÍTICA DE SEGURIDADE SOCIAL REALIZADA ATRAVÉS DE UM CONJUNTO INTEGRADO DE AÇÕES DE INICIATIVA PÚBLICA E DA SOCIEDADE, PARA GARANTIR O ATENDIMENTO ÀS NECESSIDADES BÁSICAS DOS CIDADÃOS. • IMPLEMENTAR O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS), PROMOVENDO SERVIÇOS DE PROTEÇÃO SOCIAL AOS CIDADÃOS QUE DELA NECESSITAREM; • SER REFERÊNCIA NA DEFESA E GARANTIA DE DIREITOS E NA PRESTAÇÃO DE SERVIÇOS, PROGRAMAS, PROJETOS E BENEFÍCIOS ÀS FAMÍLIAS DE SÃO JOSÉ DO DIVINO, ORIENTADOS PELA POLÍTICA NACIONAL DE ASSISTÊNCIA SOCIAL (PNAS), LEI ORGÂNICA DE ASSISTÊNCIA SOCIAL (LOAS) E PELO SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS).</p>
-                                </div>
-    
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="over_card_comp">
-                        <div class="card_comp">
-                            <div class="left_card_comp">
-                                <img src="https://images.pexels.com/photos/5668773/pexels-photo-5668773.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
-                            </div>
-                            <div class="right_card_comp">
-                                <div class="head_card_comp">
-                                    <h3>Secretário da educação</h3>
-
-                                    <span class="btn_close_card_comp">
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                </div>
-    
-                                <ul>
-                                    <li><i class="bi bi-person-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-clock"></i> <span>8h às 17h</span></li>
-                                    <li><i class="bi bi-telephone-fill"></i> <span>Fulano de Tale</span></li>
-                                    <li><i class="bi bi-person-fill"></i> <span>(99) 99999-9999</span></li>
-                                    <li><i class="bi bi-envelope"></i> <span>email@contato.com.br</span></li>
-                                    <li><i class="bi bi-geo-alt-fill"></i> <span>AVENIDA PAULO RODRIGUES S/N CENTRO</span></li>
-                                </ul>
-    
-                                <div class="card_comp_more">
-                                    <div class="btn_card_comp_more">
-                                        Ver Mais
-                                    </div>
-                                    <div class="btn_card_comp_more_mobile">
-                                        Ver Mais
-                                    </div>
-                                </div>
-
-                                <div class="desc_card_comp">
-                                    <p>A SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL TEM COMO FINALIDADE ESTABELECER A GESTÃO INTEGRADA DE SERVIÇOS E BENEFÍCIOS; E AFIANÇAR A VIGILÂNCIA SOCIAL E A GARANTIA DE DIREITOS. O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS) ORGANIZAÇÃO A OFERTA DE PROGRAMAS, SERVIÇOS, PROJETOS E BENEFÍCIOS, BEM COMO O DESENVOLVIMENTO DE POLÍTICAS PÚBLICAS VOLTADAS PARA A PROTEÇÃO INTEGRAL DO PORTADOR DE DEFICIÊNCIA, QUALQUER QUE SEJA SEU NÍVEL DE COMPROMETIMENTO, CONTRIBUINDO PARA O ESTABELECIMENTO DE SUA DIGNIDADE E EXERCÍCIO PLENO DE SUA CIDADANIA E CONSEQUENTE TRANSFORMAÇÃO DA CONCEPÇÃO SOCIAL. É UMA POLÍTICA DE SEGURIDADE SOCIAL REALIZADA ATRAVÉS DE UM CONJUNTO INTEGRADO DE AÇÕES DE INICIATIVA PÚBLICA E DA SOCIEDADE, PARA GARANTIR O ATENDIMENTO ÀS NECESSIDADES BÁSICAS DOS CIDADÃOS. • IMPLEMENTAR O SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS), PROMOVENDO SERVIÇOS DE PROTEÇÃO SOCIAL AOS CIDADÃOS QUE DELA NECESSITAREM; • SER REFERÊNCIA NA DEFESA E GARANTIA DE DIREITOS E NA PRESTAÇÃO DE SERVIÇOS, PROGRAMAS, PROJETOS E BENEFÍCIOS ÀS FAMÍLIAS DE SÃO JOSÉ DO DIVINO, ORIENTADOS PELA POLÍTICA NACIONAL DE ASSISTÊNCIA SOCIAL (PNAS), LEI ORGÂNICA DE ASSISTÊNCIA SOCIAL (LOAS) E PELO SISTEMA ÚNICO DE ASSISTÊNCIA SOCIAL (SUAS).</p>
-                                </div>
-    
-                            </div>
-                        </div>
-                    </div>
+                    ?>
                     
                 </div>
             </div>
