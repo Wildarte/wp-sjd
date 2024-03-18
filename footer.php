@@ -54,8 +54,8 @@
 
                 <?php
                     wp_nav_menu(array(
-                        'theme_location' => 'menu-rodape-menu',
-                        'menu_id' => 'menu-rodape-menu',
+                        'theme_location' => 'menu-rodape-secretarias',
+                        'menu_id' => 'menu-rodape-secretarias',
                         'menu_class' => 'ul_line',
                         'container' => 'ul',
                     ));

@@ -121,4 +121,26 @@ function create_posttype_secretaria(){
     );
 }
 add_action ( 'init', 'create_posttype_secretaria' );
+
+
+
+function get_page_id_by_template($template_name) {
+    $pages = get_pages(array(
+        'meta_key' => '_wp_page_template',
+        'meta_value' => $template_name
+    ));
+
+    if (!empty($pages)) {
+        return $pages[0]->ID;
+    } else {
+        return null;
+    }
+}
+
+
+
+
+
 ?>
+
+
