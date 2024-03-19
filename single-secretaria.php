@@ -40,11 +40,9 @@
                         </ul>
                     </div>
 
-                    <p>Filho do finado Bento Camargo e Maria Ascenção Bedin Camargo, Emerson Rodrigo Camargo, conhecido em Jaboticabal e na região por Prof. Emerson, nasceu em 14 de julho de 1979, em Jaboticabal.</p>
-
-                    <p>Emerson é graduado em Filosofia e História, Mestre em Educação e pós-graduando em Gestão Pública, curso que tem feito recentemente e o ajuda a compreender melhor os desafios da administração de uma cidade e quais os melhores caminhos para se tomar na resolução de problemas. Atualmente é professor da rede pública e privada de ensino.</p>
-
-                    <p>Durante sua adolescência e até hoje, prof. Emerson sempre foi e se manteve engajado no assunto político, porém, sem fazer desta vocação a sua profissão. Entre os anos de 2009 e 2012 ele esteve como vereador na cidade de Jaboticabal.</p>
+                    <?php
+                        the_content();
+                    ?>
                 
             </div>
        </section>

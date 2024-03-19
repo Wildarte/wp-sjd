@@ -7,7 +7,7 @@ use FakerPress\Field;
 ?>
 
     <main>
-        <section class="hero">
+        <section class="hero" style="display: none">
             
             <div class="fast_access access_desktop">
 
@@ -27,6 +27,204 @@ use FakerPress\Field;
 
             </div>
         </section>
+
+
+        <!-- ======================== Hero dois ==================================== -->
+
+        <style>
+            /* Slideshow container */
+.slideshow-container {
+  width: 100%;
+  position: relative;
+  margin: auto;
+}
+.slideshow-container img{
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+}
+
+
+.text h3{
+    color: #ffffff;
+    font-size: 2em;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    margin-top: -60px;
+    opacity: 0;
+    transition: all 1s;
+}
+.margin_down{
+    opacity: 1!important;
+    margin-top: 0!important;
+    font-size: 4em!important;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 2.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@media(max-width: 1024px){
+    .slideshow-container img{
+        height: 500px;
+    }
+}
+
+@media(max-width: 768px){
+    .margin_down{
+        opacity: 1!important;
+        margin-top: 0!important;
+        font-size: 3em!important;
+    }
+}
+
+@media(max-width: 420px){
+    .margin_down{
+        opacity: 1!important;
+        margin-top: 0!important;
+        font-size: 2em!important;
+    }
+}
+        </style>
+
+        <section class="hero">
+            
+            <div class="slideshow-container">
+
+                <?php
+
+                    $slide_hero = get_field('slide_hero');
+
+                    foreach($slide_hero as $item):
+
+                ?>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="<?= $item['imagem'] ?>" style="width:100%">
+                    <div class="text"><h3><?= $item['texto'] ?>
+                    </h3></div>
+                </div>
+
+                <?php endforeach; ?>
+
+            </div>
+                <div class="fast_access access_desktop">
+
+                    <?php
+                        $acesso_rapido_hero = get_field('acesso_rapido_hero');
+                        
+
+                        foreach($acesso_rapido_hero as $item):
+                    ?>
+
+                    <a href="<?= $item['link'] ?>" class="animate__animated animate__bounceIn">
+                        <img src="<?= $item['imagem'] ?>" alt="">
+                        <p><?= $item['titulo'] ?></p>
+                    </a>
+
+                    <?php endforeach; ?>
+
+                </div>
+        </section>
+
+        <script>
+            let slideIndex = 1;
+
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let text_slide = document.querySelectorAll('.slideshow-container .mySlides .text')
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+    text_slide[i].querySelector('h3').classList.remove('margin_down');
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(function(){
+    text_slide[slideIndex-1].querySelector('h3').classList.add('margin_down');
+  }, 20)
+  setTimeout(showSlides, 4000); // Change image every 2 seconds
+}
+        </script>
+        <!-- ======================== Hero dois ==================================== -->
 
         <section class="access_mobile">
             <div class="fast_access">
@@ -287,6 +485,7 @@ use FakerPress\Field;
             </div>
         </section>
 
+        <!-- 
 
         <section class="sec_video">
             <div class="container sec-default">
@@ -316,6 +515,8 @@ use FakerPress\Field;
                 </div>
             </div>
         </section>
+        
+         -->
 
     </main>
 

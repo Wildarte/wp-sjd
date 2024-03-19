@@ -138,9 +138,3 @@ function get_page_id_by_template($template_name) {
 }
 
 
-
-
-
-?>
-
-

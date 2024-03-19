@@ -72,6 +72,7 @@ $(document).ready(function(){
 
 
     //========================= page secretarias ==================================
+    /*
     const container_comp = document.querySelector('.container_comp');
     if(container_comp){
         
@@ -116,6 +117,7 @@ $(document).ready(function(){
         })
 
     }
+    */
 
     const item_menu = document.querySelectorAll('nav.menu > ul > li.menu-item-has-children > a');
     const sub_menu = document.querySelectorAll('nav.menu > ul > li.menu-item-has-children > ul.sub-menu');

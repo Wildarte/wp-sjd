@@ -9,49 +9,82 @@ get_header();
             <div class="container sec-min">
                 <div class="bread_crumb">
                     <ul>
-                        <li><a href="">Home</a></li>
+                        <li><a href="<?= home_url() ?>">Home</a></li>
                         <li><a href="">Notícias</a></li>
                     </ul>
                 </div>
             </div>
         </section>
         
+        <?php if(!is_paged()): ?>
+
         <section class="destaque_news">
             <div class="container sec-min d-flex">
                 <div class="head_section">
                     <h2><span>Destaque</span></h2>
                 </div>
                 <div class="f-50">
+                    <?php
+                        $post_destaque = get_field('post_destaque');
+
+                        $args = [
+                            'post_type' => 'post',
+                            'p' => $post_destaque,
+                            'posts_per_page' => 1
+                        ];
+
+                        $result_dest = new WP_Query($args);
+
+                        if($result_dest->have_posts()):
+                            while($result_dest->have_posts()):
+                                $result_dest->the_post();
+                    ?>
                     <article class="post_destaque_news">
-                        <a href="">
-                            <img src="https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_1280.jpg" alt="">
+                        <a href="<?= get_the_permalink() ?>">
+                            <img src="<?= get_the_post_thumbnail_url(null, 'medium') ?>" alt="">
                             <div class="info_post_destaque_news">
-                                <span>Cidade</span>
-                                <h3>Cidade de São José do Divino Inaugura nova ponte</h3>
+                                <span><?= get_the_category()[0]->name; ?></span>
+                                <h3><?= get_the_title() ?></h3>
                             </div>
                         </a>
                     </article>
+
+                    <?php endwhile; endif; wp_reset_query(); wp_reset_postdata(); ?>
+
                 </div>
 
                 <div class="f-50 left_destaque_news">
+
+                    <?php
+                            $dois_destaque = get_field('dois_destaques');
+
+                            $args = [
+                                'post_type' => 'post',
+                                'post__in' => $dois_destaque,
+                                'posts_per_page' => 2
+                            ];
+    
+                            $result_dest2 = new WP_Query($args);
+    
+                            if($result_dest2->have_posts()):
+                                while($result_dest2->have_posts()):
+                                    $result_dest2->the_post();
+                    ?>
+
                     <article class="post_destaque_news card_dest_half">
-                        <a href="">
-                            <img src="https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287_1280.jpg" alt="">
+                        <a href="<?= get_the_permalink() ?>">
+                            <img src="<?= get_the_post_thumbnail_url(null, 'medium') ?>" alt="">
                             <div class="info_post_destaque_news">
-                                <span>Cidade</span>
-                                <h3>Cidade de São José do Divino Inaugura nova ponte</h3>
+                                <span><?= get_the_category()[0]->name; ?></span>
+                                <h3><?= get_the_title(); ?></h3>
                             </div>
                         </a>
                     </article>
-                    <article class="post_destaque_news card_dest_half">
-                        <a href="">
-                            <img src="https://cdn.pixabay.com/photo/2016/12/06/14/33/log-cabin-1886620_1280.jpg" alt="">
-                            <div class="info_post_destaque_news">
-                                <span>Cidade</span>
-                                <h3>Cidade de São José do Divino Inaugura nova ponte</h3>
-                            </div>
-                        </a>
-                    </article>
+
+                    <?php
+                        endwhile; endif; wp_reset_query(); wp_reset_postdata();
+                    ?>
+
                 </div>
             </div>
         </section>
@@ -59,20 +92,26 @@ get_header();
         <section>
             <div class="container sec-default-middle">
                 <div class="destaques_page owl-carousel">
-                    <a href="" clas>
-                        <img src="https://cdn.pixabay.com/photo/2018/05/02/18/23/landscape-3369304_1280.jpg" alt="">
-                    </a>
+                    
+                    <?php
 
-                    <a href="" clas>
-                        <img src="https://cdn.pixabay.com/photo/2014/07/06/17/20/tractor-385681_1280.jpg" alt="">
-                    </a>
+                        $slide_imagens = get_field('slide_imagens', get_page_id_by_template('page-home.php'));
 
-                    <a href="" clas>
-                        <img src="https://cdn.pixabay.com/photo/2018/05/26/19/42/rural-area-3432088_960_720.jpg" alt="">
-                    </a>
+                        foreach($slide_imagens as $item):
+
+                        ?>
+
+                        <a href="<?= $item['url_imagem'] ?>" class="">
+                            <img src="<?= $item['imagem_slide'] ?>" alt="">
+                        </a>
+
+                    <?php endforeach; ?>
+
                 </div>
             </div>
         </section>
+
+        <?php endif; ?>
 
         <section class="sec_news">
             <div class="container sec-default-middle">
@@ -81,98 +120,50 @@ get_header();
                     <div class="head_section">
                         <h2><span>Últimas Notícias</span></h2>
                     </div>
-                    <div class="card_destaq">
-                        <a href="">
-                            <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/074cf4154772b6f6694bf575d2580763.png" alt="">
-                        </a>
-                        <div class="info_card_destaq">
-                            <h4>EDITAL 01/2024 JORNADA SUPLEMENTAR PARA</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid error amet tempore voluptas minima, quia numquam dolore ad.</p>
 
-                            <div class="over_link_card_destaq">
-                                <a href="" class="link_card_destaq">Saiba Mais</a>
-                            </div>
-                        </div>
-                    </div>
-                
+                    <?php
+
+                        if(have_posts()):
+                            while(have_posts()):
+                                the_post();
+
+                    ?>
 
                     <div class="card_destaq">
-                        <a href="">
-                            <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/9e3f51a589294c74177c59455e0a9558.png" alt="">
+                        <a href="<?= get_the_permalink() ?>">
+                            <img src="<?= get_the_post_thumbnail_url(null, 'medium') ?>" alt="">
                         </a>
                         <div class="info_card_destaq">
-                            <h4>EDITAL Nº 005/2023 - SECRETARIA MUNICIPAL DE ESPORTE</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid error amet tempore voluptas minima, quia numquam dolore ad.</p>
+                            <h4><?= get_the_title() ?></h4>
+                            <p><?= get_the_excerpt() ?></p>
 
                             <div class="over_link_card_destaq">
-                                <a href="" class="link_card_destaq">Saiba Mais</a>
-                            </div>
-                        </div>
-                    </div>
-                
-
-                    <div class="card_destaq">
-                        <a href="">
-                            <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/230fdedb6bb9a0afb09e098b8cc13f41.png" alt="">
-                        </a>
-                        <div class="info_card_destaq">
-                            <h4>PREMIAÇÃO LEITEIRA</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid error amet tempore voluptas minima, quia numquam dolore ad.</p>
-
-                            <div class="over_link_card_destaq">
-                                <a href="" class="link_card_destaq">Saiba Mais</a>
+                                <a href="<?= get_the_permalink(); ?>" class="link_card_destaq">Saiba Mais</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card_destaq">
-                        <a href="">
-                            <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/6ab9fe779f40b1654a7d5e220e12d4e9.png" alt="">
-                        </a>
-                        <div class="info_card_destaq">
-                            <h4>RECADASTRAMENTO DE SERVIDORES</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid error amet tempore voluptas minima, quia numquam dolore ad.</p>
+                    <?php endwhile; endif; ?>
 
-                            <div class="over_link_card_destaq">
-                                <a href="" class="link_card_destaq">Saiba Mais</a>
-                            </div>
-                        </div>
-                    </div>
-                
-
-                    <div class="card_destaq">
-                        <a href="">
-                            <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/842e973a8edf606f9873bd33592a2889.png" alt="">
-                        </a>
-                        <div class="info_card_destaq">
-                            <h4>SELO UNICEF</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid error amet tempore voluptas minima, quia numquam dolore ad.</p>
-
-                            <div class="over_link_card_destaq">
-                                <a href="" class="link_card_destaq">Saiba Mais</a>
-                            </div>
-                        </div>
-                    </div>
-                
-
-                    <div class="card_destaq">
-                        <a href="">
-                            <img src="https://sts-gestao.s3.amazonaws.com/uploads/noticias/8b87551d4d406185ff50a5ad6da3db2e.png" alt="">
-                        </a>
-                        <div class="info_card_destaq">
-                            <h4>DECRETO DE DESAPROPRIAÇÃO</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid error amet tempore voluptas minima, quia numquam dolore ad.</p>
-
-                            <div class="over_link_card_destaq">
-                                <a href="" class="link_card_destaq">Saiba Mais</a>
-                            </div>
-                        </div>
-                    </div>
                 
                 </div>
 
-                <div class="d-flex over_btn_default">
-                    <a href="" class="btn-default">Mais Notícias</a>
+                <div class="d-flex over_btn_default pagination_page">
+                <?php
+                // Verifica se existem posts paginados
+                if ( $wp_query->max_num_pages > 1 ) :
+                ?>
+                    <nav class="pagination">
+                        <?php
+                        // Gera os links de paginação
+                        echo paginate_links( array(
+                            'prev_text' => __('« Anterior'),
+                            'next_text' => __('Próximo »'),
+                        ) );
+                        ?>
+                    </nav>
+                <?php endif; ?>
+
                 </div>
             </div>
         </section>
